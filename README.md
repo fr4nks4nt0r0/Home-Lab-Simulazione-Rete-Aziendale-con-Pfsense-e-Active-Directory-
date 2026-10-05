@@ -5,7 +5,8 @@ OBIETTIVO PROGETTO:
 Dopo aver ottenuto la certificazione CompTIA Security+, volevo consolidare le basi pratiche di sistemistica e networking che stanno dietro la teoria, in particolare capendo come un'azienda strutturi la propria rete interna: un firewall che fa da confine e gateway, un dominio Active Directory per la gestione di utenti e macchine, e un client che si autentica su quel dominio.
 
 ARCHITETTURA:
-<img width="960" height="540" alt="strutturahomelab" src="https://github.com/user-attachments/assets/9ed1adbf-f542-4af6-ad31-f0fc01100f6a" />
+<img width="900" height="520" alt="architettura" src="https://github.com/user-attachments/assets/1f5f2a12-a9d7-46f1-8700-2db1ce71b034" />
+
 
 Struttura Active Directory:
 lab.local
