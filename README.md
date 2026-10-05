@@ -2,7 +2,7 @@
 Ambiente laboratorio virtualizzato (VMware) che replica infrastruttura di una piccola azienda, un firewall/Router perimetrale (pfsense), un Domain Controller Windows Server con AD e DNS, un client Windows unito al dominio.
 
 OBIETTIVO PROGETTO:
-Dopo aver ottenuto la cert CompTIA Security+, volevo consolidare le basi pratiche di sistemistica e networking che stanno dietro la teoria, in particolare capendo come un'azienda strutturi la propria rete interna: un firewall che fa da confine e gateway, un dominio Active Directory per la gestione di utenti e macchine, e un client che si autentica su quel dominio.
+Dopo aver ottenuto la certificazione CompTIA Security+, volevo consolidare le basi pratiche di sistemistica e networking che stanno dietro la teoria, in particolare capendo come un'azienda strutturi la propria rete interna: un firewall che fa da confine e gateway, un dominio Active Directory per la gestione di utenti e macchine, e un client che si autentica su quel dominio.
 
 ARCHITETTURA:
 <img width="960" height="540" alt="strutturahomelab" src="https://github.com/user-attachments/assets/9ed1adbf-f542-4af6-ad31-f0fc01100f6a" />
@@ -18,11 +18,11 @@ lab.local
 Stack Tecnologico:
 
 Hypervisor VMware///Workstation Player (reti host-only)
-Firewall-router///pfSense 2.90 CE
+Firewall-router///pfSense 2.9.0 CE
 Domain Controller//Windows Server 2022 Evaluation
 Servizi///Active Directory Domain Service, DNS integrato
 Client///Windows 11 Enterprise Evaluation
-Rete///10.10.0.0/24(client), 10.10.20.0/24 (Server) NAT per WAN
+Rete///10.10.10.0/24(client), 10.10.20.0/24 (Server) NAT per WAN
 
 Setup --- Panoramica
 1) Rete virtuale: Create 2 reti host only dedicate (VMnet1 per il segmento client, VMnet2 per server) su VMware, isolate dalla rete fisica del laptop.
@@ -77,7 +77,7 @@ Brave impediva collegamento alla pagina di login di pfsense per via degli shield
 
 6) Spostando il Domain Controller su un nuovo segmento di rete, il client non riusciva più ad autenticare l'account di dominio necessario per aggiornare le proprie impostazioni DNS, (serve il dominio raggiungibile per elevare i permessi, ma serve il DNS aggiornato per raggiungere il dominio). Risolto cambiando l'ordine delle operazioni: aggiornare prima il DNS del client mentre il dominio era ancora pienamente raggiungibile, e solo dopo spostare il Domain Controller sul nuovo segmento.
 
-7) Una regola pensata per permettere il traffico Server→Client usava come destinazione l'indirizzo del singolo router (LAN address) invece dell'intera subnet (LAN subnets), escludendo di fatto ogni host reale della rete client. 
+7) Una regola pensata per permettere il traffico Server→Client usava come destinazione l'indirizzo del singolo router (LAN address) invece dell'intera subnet (LAN subnets), escludendo di fatto ogni host reale della rete client. Risolto cambiando destinazione.
 
 8) Regola disattivata per errore durante iterazioni di test
 Durante ripetuti test di verifica (attiva/disattiva la regola per dimostrare il blocco), la regola è rimasta disattivata da un passaggio precedente, nascondendo il motivo del successivo errore di ping. Risolto riguardando con attenzione lo stato (enable/disable)
