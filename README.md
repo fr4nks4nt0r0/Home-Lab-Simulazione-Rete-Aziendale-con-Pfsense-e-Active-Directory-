@@ -2,7 +2,7 @@
 Ambiente laboratorio virtualizzato (VMware) che replica infrastruttura di una piccola azienda, un firewall/Router perimetrale (pfsense), un Domain Controller Windows Server con AD e DNS, un client Windows unito al dominio.
 
 OBIETTIVO PROGETTO:
-Dopo aver ottenuto la certificazione CompTIA Security+, volevo consolidare le basi pratiche di sistemistica e networking che stanno dietro la teoria, in particolare capendo come un'azienda strutturi la propria rete interna: un firewall che fa da confine e gateway, un dominio Active Directory per la gestione di utenti e macchine, e un client che si autentica su quel dominio.
+Dopo aver ottenuto la certificazione CompTIA Security+, volevo consolidare le mie conoscenze partendo dalle basi di sistemistica e networking, in particolare capendo come un'azienda struttura la propria rete interna: un firewall che fa da confine e gateway, un dominio Active Directory per la gestione di utenti e macchine, e un client che si autentica su quel dominio.
 
 ARCHITETTURA:
 <img width="900" height="520" alt="architettura" src="https://github.com/user-attachments/assets/1f5f2a12-a9d7-46f1-8700-2db1ce71b034" />
@@ -12,8 +12,8 @@ Struttura Active Directory:
 lab.local
 - Domain controllers (default, non modificato)
 - Server
-- Client => workstation utente (ho applicato GPO di hardening qui)
-- Utenti => account persona es. Mario Rossi
+- Client = workstation utente (ho applicato GPO di hardening qui)
+- Utenti = account persona es. Mario Rossi
 
 
 Stack Tecnologico:
@@ -25,14 +25,14 @@ Servizi///Active Directory Domain Service, DNS integrato
 Client///Windows 11 Enterprise Evaluation
 Rete///10.10.10.0/24(client), 10.10.20.0/24 (Server) NAT per WAN
 
-Setup --- Panoramica
+Setup 
 1) Rete virtuale: Create 2 reti host only dedicate (VMnet1 per il segmento client, VMnet2 per server) su VMware, isolate dalla rete fisica del laptop.
 2) pfSense: installato da ISO, assegnate le interfacce WAN (NAT, verso internet) e LAN (segmento Client, 10.10.10.0/24), e OPT1(segmento server, 10.10.20.0/24) ciascuna con DHCP dedicato.
 3) DC: installato Windows server 2022, promosso a DC creando una nuova foresta, lab.local, con il ruolo DNS installato in automatico e integrato con AD.
 4) STRUTTURA AD: create le Organizational Unit Server, Client, e Utenti per separare logicamente risorse, workstation e account, in modo da poter applicare Group Policy mirate a ciascun gruppo.
 5) Client: Installato windows 11 sul segmento client, configurato DNS per puntare al Domain Controller, e unito al dominio lab.local col relativo oggetto computer.
 6) Segmentazione firewall: configurate le regole su pfsense per controllare esplicitamente il traffico tra i due segmenti, invece di lasciare tutto aperto.
-7) Hardening: applicate group policy sulla OU client per un banner di sicurezza al login e la disattivazione di protocolli legacy vulnerabili.
+7) Hardening: fatto group policy sulla OU client per un banner di sicurezza al login e la disattivazione di protocolli legacy vulnerabili.
 
 
 SEGMENTAZIONE DI RETE COME VLAN SIMULATA
@@ -102,7 +102,7 @@ COMPETENZE DIMOSTRATE
 - Installazione di un firewall perimetrale (pfsense) con regole di controllo del traffico fra segmenti, comprendendo la direzionalità delle regole in un firewall stateful
 - Deployment di AD Domain Services e integrazione con DNS
 - Progettazione della struttura organizzativa in AD con OU per applicazione mirata di group policy
-- Hardening di base contro protocolli legacy obsoleti
+- Hardening base contro protocolli legacy obsoleti
 - Troubleshooting sistematico di problemi di rete attraverso approccio metodico, individuare variabile e verificare un livello alla volta.
 
 SVILUPPI FUTURI:
